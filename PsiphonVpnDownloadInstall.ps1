@@ -14,5 +14,5 @@ Import-Module BitsTransfer
 Write-Host "Starting to download the file ..."
 Start-BitsTransfer -Source $url -Destination $output
 
-# Write-Host "Starting to install the software"
-# Start-Process "$output" -ArgumentList "/S /v/qn"
+Write-Host "Starting to install the software"
+Start-Process "$output" -ArgumentList "/S /v/qn"
