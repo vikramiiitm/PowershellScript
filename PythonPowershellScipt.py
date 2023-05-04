@@ -6,6 +6,9 @@ import multiprocessing
 from time import perf_counter
 
 class PowerShellScipts:
+    """
+    Using multithreading and multiprocessing to download software by invoking powershell script.
+    """
     
     def __init__(self, data) -> None:
         self.data = data
@@ -49,6 +52,15 @@ class PowerShellScipts:
         for i in process:
             i.join()
         print(f"Total Time taken: {perf_counter()-start} seconds")
+        
+    def normal_download(self)->None:
+        start = perf_counter()
+        for file, url in self.data.items():
+            for i in range(50):
+                self.powershell_run(file+str(i), url)
+                
+        print(f"Total Time taken: {perf_counter()-start} seconds")
+
             
     def process_run(self):
         pass
@@ -61,5 +73,9 @@ if __name__ == "__main__":
     ps = PowerShellScipts(data)
     # ps.thread_download()
     # ps.mprocess_download()
+    ps.normal_download()
     
     # Downloading and installing is fast using multiprocessing, also it's safe afater testing for downlaoding 50 software copies
+    # multiprocessing time: ~59 seconds
+    # multithreading time: ~55 seconds
+    # Sequential time: ~148
