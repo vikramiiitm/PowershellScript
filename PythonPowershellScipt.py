@@ -76,6 +76,6 @@ if __name__ == "__main__":
     ps.normal_download()
     
     # Downloading and installing is fast using multiprocessing, also it's safe afater testing for downlaoding 50 software copies
-    # multiprocessing time: ~59 seconds
-    # multithreading time: ~55 seconds
+    # multiprocessing time: ~55 seconds
+    # multithreading time: ~59 seconds
     # Sequential time: ~148
