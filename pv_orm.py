@@ -18,7 +18,7 @@ class Article(peewee.Model):
     
     author = peewee.ForeignKeyField(Author, backref='author')
     title = peewee.CharField(max_length=255)
-    publised_date = peewee.DateField(default=datetime.date.today)
+    publised_date = peewee.DateField(null=True)
     pages = peewee.IntegerField(null=True)
     
     class Meta:
