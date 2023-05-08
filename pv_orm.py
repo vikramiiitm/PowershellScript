@@ -18,7 +18,7 @@ class Article(peewee.Model):
     
     author = peewee.ForeignKeyField(Author, backref='author')
     title = peewee.CharField(max_length=255)
-    publised_date = peewee.DateField(null=True)
+    publised_date = peewee.DateField(default=datetime.date.today)
     pages = peewee.IntegerField(null=True)
     
     class Meta:
@@ -41,9 +41,9 @@ def get_author(fname: str)-> int:
 
     return Author.select().where(Author.first_name==fname).get()
     
-def create_article(author: str, title: str, publised):
+def create_article(author: str, title: str, publised=None):
 
-    Article.create(author=author, title=title, publised=publised)
+    Article.create(author=author, title=title, publised_date=publised)
     
 def get_article_by_title(title: str):
 
@@ -65,13 +65,13 @@ def update_author_lastname_by_firstname(fname: str, lname: str):
 create_tables()
 create_author("vikram", "Choudhary")
 
-update_author_lastname_by_firstname("vikram", "k")
+update_author_lastname_by_firstname("vikram", "last_name_updated")
 author = get_author(fname="vikram") 
 print(author.last_name)
-# create_article(author=author, title="Journey to the west", publised=datetime.date(1993,7,7))
+create_article(author=author, title="Journey to the west")
 
-# k = Article.select().join(Author).where(Author.first_name=="vikram").get()
-# print(k.title)
+k = Article.select().join(Author).where(Author.first_name=="vikram").get()
+print(k.title)
 
 # k = get_article_by_title("Journey to the west")
 # print(k)
